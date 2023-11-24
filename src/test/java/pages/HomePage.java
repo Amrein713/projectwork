@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Objects;
 import java.util.concurrent.locks.Condition;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class HomePage extends BasePage {
 
 
@@ -32,6 +34,10 @@ public class HomePage extends BasePage {
     @FindBy(css = "#utility-header-registration-link > span")
     WebElement regButton;
 
+    @FindBy(xpath = "//*[@id='main']/div[1]/div/div[1]/div[1]/div[2]/div[2]/div[3]/div[1]/div/div[1]/div[2]")
+    WebElement loginButton;
+
+
     public void acceptCookies() {
         acceptCookiesButton.click();
     }
@@ -55,5 +61,15 @@ public class HomePage extends BasePage {
 
     public void changeLangauge() {
         langButton.click();
+    }
+
+    public void checkLanguage(String language) { /* language=Magyar/English*/
+        if (language.equals("Magyar")) {
+            assertEquals("Regisztráció", regButton.getText());
+        }
+
+        if (language.equals("English")) {
+            assertEquals("Register", regButton.getText());
+        }
     }
 }
